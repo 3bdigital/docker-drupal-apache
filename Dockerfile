@@ -33,10 +33,8 @@ RUN curl -O http://files.drush.org/drush.phar \
 	&& chmod +x drush.phar \
 	&& mv drush.phar /usr/local/bin/drush
 
-RUN apt-get update && apt-get install -y newrelic-php5
 ENV NR_INSTALL_SILENT true
 ENV NR_INSTALL_PATH /usr/local/bin;
-RUN newrelic-install install
 	
 EXPOSE 80 443
 
