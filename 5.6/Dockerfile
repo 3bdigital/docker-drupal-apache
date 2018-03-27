@@ -1,4 +1,4 @@
-FROM php:5.5-apache
+FROM php:5.6-apache
 
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
@@ -24,12 +24,16 @@ COPY opcache-recommended.ini drupal.ini /usr/local/etc/php/conf.d/
 RUN apt-get update && apt-get -y install mysql-client
 
 WORKDIR /root
+# Install Drush 5 (legacy, can probably be removed)
 RUN curl -L -O https://github.com/drush-ops/drush/archive/5.11.0.tar.gz \
 	&& tar -xzf 5.11.0.tar.gz \
 	&& chmod u+x /root/drush-5.11.0/drush \
 	&& ln -s /root/drush-5.11.0/drush /usr/bin/drush5
 
-RUN curl -O http://files.drush.org/drush.phar \
+# Install Drush 8
+# If the .phar becomes unavailable this could be installed using Composer
+# e.g. RUN composer global require drush/drush:"$DRUSH_VERSION" --prefer-dist
+RUN curl -OL https://github.com/drush-ops/drush/releases/download/8.1.16/drush.phar \
 	&& chmod +x drush.phar \
 	&& mv drush.phar /usr/local/bin/drush
 
