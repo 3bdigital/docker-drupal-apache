@@ -62,9 +62,6 @@ RUN curl -OL https://github.com/drush-ops/drush/releases/download/8.1.16/drush.p
 	&& chmod +x drush.phar \
 	&& mv drush.phar /usr/local/bin/drush
 ENV DRUSH_VERSION 8.1.16
-
-ENV NR_INSTALL_SILENT true
-ENV NR_INSTALL_PATH /usr/local/bin;
 	
 EXPOSE 80 443
 
